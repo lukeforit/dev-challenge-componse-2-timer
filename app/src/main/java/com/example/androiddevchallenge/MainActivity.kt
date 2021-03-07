@@ -77,10 +77,8 @@ fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
                     override fun onSecondsChange(ss: String) {
                         textS = ss
                     }
-
                 }
             )
-
 
             TimerControl {
                 viewModel.start(countDownTime)
