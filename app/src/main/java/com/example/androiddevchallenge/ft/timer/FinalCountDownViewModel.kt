@@ -16,8 +16,8 @@ class FinalCountDownViewModel : ViewModel() {
         _timeLiveData.value = "00:00:00"
     }
 
-    fun start(miliseconds: Long) {
-        timer = buildTimer(miliseconds)
+    fun start(milliseconds: Long) {
+        timer = buildTimer(milliseconds)
         timer.start()
     }
 
@@ -25,11 +25,11 @@ class FinalCountDownViewModel : ViewModel() {
         timer.cancel()
     }
 
-    private fun buildTimer(miliseconds: Long): CountDownTimer {
+    private fun buildTimer(milliseconds: Long): CountDownTimer {
 
-        return object : CountDownTimer(miliseconds, 1000) {
+        return object : CountDownTimer(milliseconds, 1000) {
 
-            private val time = miliseconds
+            private val time = milliseconds
 
             override fun onTick(millisUntilFinished: Long) {
                 val seconds = millisUntilFinished / 1000
