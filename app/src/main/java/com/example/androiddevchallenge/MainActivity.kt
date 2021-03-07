@@ -25,8 +25,13 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.androiddevchallenge.ft.timer.CountDownTime
 import com.example.androiddevchallenge.ft.timer.FinalCountDownViewModel
+import com.example.androiddevchallenge.ft.timer.OnCountDownTimeChangeListener
 import com.example.androiddevchallenge.ft.timer.TimerControl
 import com.example.androiddevchallenge.ft.timer.TimerDisplay
 import com.example.androiddevchallenge.ui.theme.MyTheme
@@ -51,9 +56,34 @@ class MainActivity : AppCompatActivity() {
 fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
     Surface(color = MaterialTheme.colors.background) {
         Column() {
-            TimerDisplay(time = time)
+            var textH by remember { mutableStateOf("") }
+            var textM by remember { mutableStateOf("") }
+            var textS by remember { mutableStateOf("") }
+
+            val countDownTime = CountDownTime(textH, textM, textS)
+
+            TimerDisplay(
+                displayTime = time,
+                countDownTime,
+                object : OnCountDownTimeChangeListener {
+                    override fun onHoursChange(hh: String) {
+                        textH = hh
+                    }
+
+                    override fun onMinutesChange(mm: String) {
+                        textM = mm
+                    }
+
+                    override fun onSecondsChange(ss: String) {
+                        textS = ss
+                    }
+
+                }
+            )
+
+
             TimerControl {
-                viewModel.start(10000)
+                viewModel.start(countDownTime)
             }
         }
     }

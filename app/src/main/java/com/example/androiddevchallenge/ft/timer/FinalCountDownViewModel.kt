@@ -16,7 +16,14 @@ class FinalCountDownViewModel : ViewModel() {
         _timeLiveData.value = "00:00:00"
     }
 
-    fun start(milliseconds: Long) {
+    fun start(countDownTime: CountDownTime) {
+        val milliseconds = with(countDownTime) {
+            val h = hh.toIntOrNull() ?: 0
+            val m = mm.toIntOrNull() ?: 0
+            val s = ss.toIntOrNull() ?: 0
+            (h * 3600 + m * 60 + s) * 1000L
+        }
+
         timer = buildTimer(milliseconds)
         timer.start()
     }

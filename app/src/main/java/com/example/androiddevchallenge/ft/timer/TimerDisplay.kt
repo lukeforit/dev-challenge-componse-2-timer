@@ -23,10 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TimerDisplay(time: String) {
+fun TimerDisplay(
+    displayTime: String,
+    countDownTime: CountDownTime,
+    listener: OnCountDownTimeChangeListener
+) {
     Column {
         Text(
-            text = time,
+            text = displayTime,
             style = MaterialTheme.typography.h1,
             textAlign = TextAlign.Center,
             modifier = Modifier
@@ -36,17 +40,12 @@ fun TimerDisplay(time: String) {
         )
 
         Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
-            var textH by remember { mutableStateOf("") }
 
-            TextField(
-                value = textH,
-                onValueChange = { textH = it },
-                label = { Text("HH") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                modifier = Modifier
-                    .size(80.dp)
-                    .wrapContentHeight(),
+
+            TimerTextField(
+                value = countDownTime.hh,
+                onValueChange = { listener.onHoursChange(it) },
+                label = "HH",
             )
 
             Text(
@@ -55,17 +54,11 @@ fun TimerDisplay(time: String) {
                 modifier = Modifier.padding(16.dp)
             )
 
-            var textM by remember { mutableStateOf("") }
 
-            TextField(
-                value = textM,
-                onValueChange = { textM = it },
-                label = { Text("MM") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                modifier = Modifier
-                    .size(80.dp)
-                    .wrapContentHeight(),
+            TimerTextField(
+                value = countDownTime.mm,
+                onValueChange = { listener.onMinutesChange(it) },
+                label = "MM",
             )
 
             Text(
@@ -73,24 +66,37 @@ fun TimerDisplay(time: String) {
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier.padding(16.dp)
             )
-            var textS by remember { mutableStateOf("") }
 
-            TextField(
-                value = textS,
-                onValueChange = { textS = it },
-                label = { Text("SS") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                modifier = Modifier
-                    .size(80.dp)
-                    .wrapContentHeight(),
+            TimerTextField(
+                value = countDownTime.ss,
+                onValueChange = { listener.onSecondsChange(it) },
+                label = "SS",
             )
         }
     }
 }
 
+@Composable
+fun TimerTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String
+){
+    TextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = true,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        modifier = Modifier
+            .size(80.dp)
+            .wrapContentHeight(),
+    )
+
+}
+
 @Preview
 @Composable
 fun TimerDisplayPreview() {
-    TimerDisplay("01:30:00")
+//    TimerDisplay("01:30:00", )
 }
