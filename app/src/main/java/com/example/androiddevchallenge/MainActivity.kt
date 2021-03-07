@@ -19,6 +19,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -49,9 +50,11 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
     Surface(color = MaterialTheme.colors.background) {
-        TimerDisplay(time = time)
-        TimerControl {
-            viewModel.start(10000)
+        Column() {
+            TimerDisplay(time = time)
+            TimerControl {
+                viewModel.start(10000)
+            }
         }
     }
 }
