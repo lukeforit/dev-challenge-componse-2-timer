@@ -22,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.ft.timer.FinalCountDownViewModel
 import com.example.androiddevchallenge.ft.timer.TimerControl
@@ -36,7 +38,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                MyApp()
+                val time: String by viewModel.timeLiveData.observeAsState("")
+                MyApp(time)
             }
         }
     }
@@ -44,9 +47,9 @@ class MainActivity : AppCompatActivity() {
 
 // Start building your app here!
 @Composable
-fun MyApp() {
+fun MyApp(time: String) {
     Surface(color = MaterialTheme.colors.background) {
-        TimerDisplay(time = "")
+        TimerDisplay(time = time)
         TimerControl()
     }
 }
@@ -55,7 +58,7 @@ fun MyApp() {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp()
+        MyApp("")
     }
 }
 
@@ -63,6 +66,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        MyApp("")
     }
 }
