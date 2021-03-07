@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MyTheme {
                 val time: String by viewModel.timeLiveData.observeAsState("")
-                MyApp(time)
+                MyApp(time, viewModel)
             }
         }
     }
@@ -47,10 +47,12 @@ class MainActivity : AppCompatActivity() {
 
 // Start building your app here!
 @Composable
-fun MyApp(time: String) {
+fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
     Surface(color = MaterialTheme.colors.background) {
         TimerDisplay(time = time)
-        TimerControl()
+        TimerControl {
+            viewModel.start(10000)
+        }
     }
 }
 
@@ -58,7 +60,7 @@ fun MyApp(time: String) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp("")
+        MyApp("", FinalCountDownViewModel())
     }
 }
 
@@ -66,6 +68,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp("")
+        MyApp("", FinalCountDownViewModel())
     }
 }

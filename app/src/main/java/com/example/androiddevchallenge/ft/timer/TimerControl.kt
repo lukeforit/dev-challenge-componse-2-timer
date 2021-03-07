@@ -19,11 +19,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TimerControl() {
+fun TimerControl(
+    callback: () -> Unit
+) {
 
     Row {
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { callback.invoke() },
             modifier = Modifier
                 .padding(16.dp)
                 .wrapContentSize(Alignment.Center),
@@ -69,5 +71,5 @@ fun TimerControl() {
 @Preview
 @Composable
 fun TimerControlPreview() {
-    TimerControl()
+    TimerControl {}
 }
