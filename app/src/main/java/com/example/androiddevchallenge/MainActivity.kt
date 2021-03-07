@@ -21,10 +21,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.androiddevchallenge.ft.timer.FinalCountDownViewModel
+import com.example.androiddevchallenge.ft.timer.TimerControl
+import com.example.androiddevchallenge.ft.timer.TimerDisplay
 import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MyApp() {
     Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+        TimerDisplay(time = "")
+        TimerControl()
     }
 }
 
