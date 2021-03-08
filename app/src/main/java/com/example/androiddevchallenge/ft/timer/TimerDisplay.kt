@@ -88,10 +88,14 @@ fun TimerTextField(
 ) {
     TextField(
         value = value,
-        onValueChange = onValueChange,
+        onValueChange = {
+            if (it.length < 3) {
+                onValueChange.invoke(it)
+            }
+        },
         label = { Text(label) },
         singleLine = true,
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
         modifier = Modifier
             .wrapContentSize()
             .requiredWidth(80.dp),
