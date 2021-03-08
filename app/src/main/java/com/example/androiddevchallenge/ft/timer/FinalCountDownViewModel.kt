@@ -38,7 +38,7 @@ class FinalCountDownViewModel : ViewModel() {
             val h = hh.toIntOrNull() ?: 0
             val m = mm.toIntOrNull() ?: 0
             val s = ss.toIntOrNull() ?: 0
-            (h * 3600 + m * 60 + s) * 1000L
+            (h * 3600L + m * 60L + s) * 1000L
         }
 
         _timeLiveData.value = formatTime(milliseconds)
@@ -69,7 +69,7 @@ class FinalCountDownViewModel : ViewModel() {
         val seconds = millis / 1000
         val s = seconds % 60
         val m = (seconds / 60) % 60
-        val h = (seconds / (60 * 60)) % 24
+        val h = (seconds / (60 * 60))
         return String.format("%02d:%02d:%02d", h, m, s)
     }
 }
