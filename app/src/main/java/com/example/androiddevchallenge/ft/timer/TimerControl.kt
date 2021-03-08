@@ -22,7 +22,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.PlayCircleOutline
+import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material.icons.rounded.Stop
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,9 +46,9 @@ fun TimerControl(
                 .size(80.dp),
         ) {
             Icon(
-                imageVector = Icons.Rounded.PlayCircleOutline,
+                imageVector = Icons.Rounded.PlayArrow,
                 contentDescription = "",
-                tint = MaterialTheme.colors.secondary,
+                tint = MaterialTheme.colors.surface,
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape)
@@ -68,7 +68,7 @@ fun TimerControl(
             Icon(
                 imageVector = Icons.Rounded.Stop,
                 contentDescription = "",
-                tint = MaterialTheme.colors.secondary,
+                tint = MaterialTheme.colors.surface,
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape)

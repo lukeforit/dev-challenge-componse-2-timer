@@ -16,13 +16,15 @@
 package com.example.androiddevchallenge.ft.timer
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -86,7 +88,7 @@ fun TimerTextField(
     onValueChange: (String) -> Unit,
     label: String
 ) {
-    TextField(
+    OutlinedTextField(
         value = value,
         onValueChange = {
             if (it.length < 3) {
@@ -98,7 +100,8 @@ fun TimerTextField(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
         modifier = Modifier
             .wrapContentSize()
-            .requiredWidth(80.dp),
+            .requiredWidth(80.dp)
+            .clip(RoundedCornerShape(4.dp)),
     )
 }
 
