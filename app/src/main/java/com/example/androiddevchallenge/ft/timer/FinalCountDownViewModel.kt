@@ -32,6 +32,8 @@ class FinalCountDownViewModel : ViewModel() {
     }
 
     fun start(countDownTime: CountDownTime) {
+        timer.cancel()
+
         val milliseconds = with(countDownTime) {
             val h = hh.toIntOrNull() ?: 0
             val m = mm.toIntOrNull() ?: 0
