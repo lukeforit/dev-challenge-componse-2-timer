@@ -39,6 +39,8 @@ class FinalCountDownViewModel : ViewModel() {
             (h * 3600 + m * 60 + s) * 1000L
         }
 
+        _timeLiveData.value = formatTime(milliseconds)
+
         timer = buildTimer(milliseconds)
         timer.start()
     }
@@ -54,14 +56,18 @@ class FinalCountDownViewModel : ViewModel() {
             private val time = milliseconds
 
             override fun onTick(millisUntilFinished: Long) {
-                val seconds = millisUntilFinished / 1000
-                val s = seconds % 60
-                val m = (seconds / 60) % 60
-                val h = (seconds / (60 * 60)) % 24
-                _timeLiveData.value = String.format("%02d:%02d:%02d", h, m, s)
+                _timeLiveData.value = formatTime(millisUntilFinished)
             }
 
             override fun onFinish() {}
         }
+    }
+
+    private fun formatTime(millis: Long): String {
+        val seconds = millis / 1000
+        val s = seconds % 60
+        val m = (seconds / 60) % 60
+        val h = (seconds / (60 * 60)) % 24
+        return String.format("%02d:%02d:%02d", h, m, s)
     }
 }
