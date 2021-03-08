@@ -107,6 +107,17 @@ fun TimerTextField(
 
 @Preview
 @Composable
+fun TimerTextFieldPreview() {
+    TimerTextField("3", {}, "HH")
+}
+
+@Preview
+@Composable
 fun TimerDisplayPreview() {
-//    TimerDisplay("01:30:00", )
+    val listener = object : OnCountDownTimeChangeListener {
+        override fun onHoursChange(hh: String) = Unit
+        override fun onMinutesChange(mm: String) = Unit
+        override fun onSecondsChange(ss: String) = Unit
+    }
+    TimerDisplay("01:30:00", CountDownTime("2", "2", "2"), listener)
 }
