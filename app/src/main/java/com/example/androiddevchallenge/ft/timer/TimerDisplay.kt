@@ -21,6 +21,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,10 +40,11 @@ fun TimerDisplay(
     Column {
         Text(
             text = displayTime,
-            style = MaterialTheme.typography.h1,
+            style = MaterialTheme.typography.h2,
             textAlign = TextAlign.Center,
+            color = MaterialTheme.colors.primary,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(vertical = 36.dp,horizontal = 16.dp)
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
         )
@@ -102,6 +104,9 @@ fun TimerTextField(
             .wrapContentSize()
             .requiredWidth(80.dp)
             .clip(RoundedCornerShape(4.dp)),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+
+        )
     )
 }
 

@@ -36,7 +36,7 @@ fun TimerControl(
 ) {
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(top = 24.dp),
         horizontalArrangement = Arrangement.Center
     ) {
         IconButton(
@@ -48,12 +48,12 @@ fun TimerControl(
             Icon(
                 imageVector = Icons.Rounded.PlayArrow,
                 contentDescription = "",
-                tint = MaterialTheme.colors.surface,
+                tint = MaterialTheme.colors.background,
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape)
                     .background(
-                        color = MaterialTheme.colors.primaryVariant,
+                        color = MaterialTheme.colors.primary,
                         shape = MaterialTheme.shapes.large
                     )
             )
@@ -68,12 +68,12 @@ fun TimerControl(
             Icon(
                 imageVector = Icons.Rounded.Stop,
                 contentDescription = "",
-                tint = MaterialTheme.colors.surface,
+                tint = MaterialTheme.colors.background,
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(CircleShape)
                     .background(
-                        color = MaterialTheme.colors.primaryVariant,
+                        color = MaterialTheme.colors.primary,
                         shape = MaterialTheme.shapes.large
                     )
             )
