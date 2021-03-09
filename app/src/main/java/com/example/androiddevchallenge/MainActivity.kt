@@ -28,7 +28,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.ft.timer.CountDownTime
 import com.example.androiddevchallenge.ft.timer.FinalCountDownViewModel
 import com.example.androiddevchallenge.ft.timer.OnCountDownTimeChangeListener
@@ -42,8 +44,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             MyTheme {
+                window.statusBarColor = MaterialTheme.colors.surface.toArgb()
+                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+
                 val time: String by viewModel.timeLiveData.observeAsState("")
                 MyApp(time, viewModel)
             }
