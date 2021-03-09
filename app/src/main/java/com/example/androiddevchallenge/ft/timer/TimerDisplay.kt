@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge.ft.timer
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -37,16 +38,17 @@ fun TimerDisplay(
     countDownTime: CountDownTime,
     listener: OnCountDownTimeChangeListener
 ) {
-    Column {
+    Column(modifier = Modifier.padding(top = 16.dp)) {
         Text(
             text = displayTime,
             style = MaterialTheme.typography.h2,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colors.primary,
             modifier = Modifier
-                .padding(vertical = 36.dp,horizontal = 16.dp)
+                .padding(vertical = 36.dp, horizontal = 48.dp)
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
+                .border(1.dp, MaterialTheme.colors.primary, RoundedCornerShape(8.dp))
         )
 
         Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
