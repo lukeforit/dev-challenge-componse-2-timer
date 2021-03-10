@@ -25,6 +25,9 @@ class FinalCountDownViewModel : ViewModel() {
     private val _timeLiveData: MutableLiveData<String> = MutableLiveData()
     val timeLiveData: LiveData<String> get() = _timeLiveData
 
+    private val _animationLiveData: MutableLiveData<Int> = MutableLiveData()
+    val animationLiveData: LiveData<Int> get() = _animationLiveData
+
     private var timer = buildTimer(0)
 
     init {
@@ -59,6 +62,7 @@ class FinalCountDownViewModel : ViewModel() {
 
             override fun onTick(millisUntilFinished: Long) {
                 _timeLiveData.value = formatTime(millisUntilFinished)
+                _animationLiveData.value = ((millisUntilFinished / 1000) % 10).toInt()
             }
 
             override fun onFinish() {}

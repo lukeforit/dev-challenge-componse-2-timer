@@ -54,8 +54,7 @@ class MainActivity : AppCompatActivity() {
                 window.statusBarColor = MaterialTheme.colors.surface.toArgb()
                 window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
 
-                val time: String by viewModel.timeLiveData.observeAsState("")
-                MyApp(time, viewModel)
+                MyApp(viewModel)
             }
         }
     }
@@ -63,9 +62,12 @@ class MainActivity : AppCompatActivity() {
 
 // Start building your app here!
 @Composable
-fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
+fun MyApp(viewModel: FinalCountDownViewModel) {
     Surface(color = MaterialTheme.colors.background, modifier = Modifier.fillMaxSize()) {
         Column() {
+            val time: String by viewModel.timeLiveData.observeAsState("")
+            val digit: Int by viewModel.animationLiveData.observeAsState(0)
+
             var textH by remember { mutableStateOf("") }
             var textM by remember { mutableStateOf("") }
             var textS by remember { mutableStateOf("") }
@@ -74,6 +76,7 @@ fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
 
             TimerDisplay(
                 displayTime = time,
+                digit = digit,
                 countDownTime,
                 object : OnCountDownTimeChangeListener {
                     override fun onHoursChange(hh: String) {
@@ -101,7 +104,7 @@ fun MyApp(time: String, viewModel: FinalCountDownViewModel) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        MyApp("", FinalCountDownViewModel())
+        MyApp(FinalCountDownViewModel())
     }
 }
 
@@ -109,6 +112,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp("", FinalCountDownViewModel())
+        MyApp(FinalCountDownViewModel())
     }
 }

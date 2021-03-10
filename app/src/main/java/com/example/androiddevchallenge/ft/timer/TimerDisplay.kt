@@ -15,6 +15,7 @@
  */
 package com.example.androiddevchallenge.ft.timer
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,10 +24,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,10 +37,27 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun TimerDisplay(
     displayTime: String,
+    digit: Int,
     countDownTime: CountDownTime,
     listener: OnCountDownTimeChangeListener
 ) {
     Column(modifier = Modifier.padding(top = 16.dp)) {
+        val borderColor by animateColorAsState(
+            targetValue = when (digit) {
+                0 -> MaterialTheme.colors.primary
+                1 -> Color(0xFFDD89DD)
+                2 -> Color(0xFF673AB7)
+                3 -> Color(0xFF3F51B5)
+                4 -> Color(0xFF4CAF50)
+                5 -> Color(0xFFFFEB3B)
+                6 -> Color(0xFFFF9800)
+                7 -> Color(0xFFF44336)
+                8 -> Color(0xFF00BCD4)
+                9 -> Color(0xFFFFC107)
+                else -> Color(0xFF393044)
+            },
+        )
+
         Text(
             text = displayTime,
             style = MaterialTheme.typography.h2,
@@ -48,7 +67,7 @@ fun TimerDisplay(
                 .padding(vertical = 36.dp, horizontal = 48.dp)
                 .fillMaxWidth()
                 .align(Alignment.CenterHorizontally)
-                .border(1.dp, MaterialTheme.colors.primary, RoundedCornerShape(8.dp))
+                .border(2.dp, borderColor, RoundedCornerShape(8.dp))
         )
 
         Row(modifier = Modifier.align(alignment = Alignment.CenterHorizontally)) {
@@ -126,5 +145,5 @@ fun TimerDisplayPreview() {
         override fun onMinutesChange(mm: String) = Unit
         override fun onSecondsChange(ss: String) = Unit
     }
-    TimerDisplay("01:30:00", CountDownTime("2", "2", "2"), listener)
+    TimerDisplay("01:30:00", 0, CountDownTime("2", "2", "2"), listener)
 }
