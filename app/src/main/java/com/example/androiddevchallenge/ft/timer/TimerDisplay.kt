@@ -131,9 +131,7 @@ fun TimerTextField(
             .wrapContentSize()
             .requiredWidth(80.dp)
             .clip(RoundedCornerShape(4.dp)),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-
-        )
+        colors = TextFieldDefaults.outlinedTextFieldColors()
     )
 }
 
